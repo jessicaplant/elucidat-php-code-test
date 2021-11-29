@@ -45,7 +45,7 @@ class BaseItem extends GoblinsItem
             case 'Aged Brie': $this->beCheese(); break;
             case strpos($this->name, 'Sulfuras') !== false : $this->beExecutus(); break;
             case strpos($this->name, 'Backstage passes') !== false :  $this->beBackstagePass(); break;
-            case strpos($this->name, 'Conjured') !== false : $this->beManaCake(); break;
+            case strpos($this->name, 'Conjured') !== false : $this->beConjured(); break;
             default: $this->beNormal();
         }
     }
@@ -56,14 +56,13 @@ class BaseItem extends GoblinsItem
      */
     private function beNormal()
     {
-        --$this->quality;
-        --$this->sellIn;
-
+        $this->decreaseQuality(1);
+        $this->decreaseSellIn(1);
         if ($this->sellIn <= 0) {
-            --$this->quality;
+            $this->decreaseQuality(1);
         }
         if ($this->quality < 0) {
-            $this->quality = 0;
+            $this->setQuality(0);
         }
     }
 
@@ -77,14 +76,14 @@ class BaseItem extends GoblinsItem
      */
     private function beCheese()
     {
-        ++$this->quality;
-        --$this->sellIn;
+        $this->increaseQuality(1);
+        $this->decreaseSellIn(1);
 
         if ($this->sellIn < 0) {
-            ++$this->quality;
+            $this->increaseQuality(1);
         }
         if ($this->quality > 50) {
-            $this->quality = 50;
+            $this->setQuality(50);
         }
     }
 
@@ -95,20 +94,20 @@ class BaseItem extends GoblinsItem
      */
     private function beBackstagePass()
     {
-        ++$this->quality;
-        --$this->sellIn;
+        $this->increaseQuality(1);
+        $this->decreaseSellIn(1);
 
         if ($this->sellIn < 10) {
-            ++$this->quality;
+            $this->increaseQuality(1);
         }
         if ($this->sellIn <= 5) {
-            ++$this->quality;
+            $this->increaseQuality(1);
         }
         if ($this->sellIn < 0) {
-            $this->quality = 0;
+            $this->setQuality(0);
         }
         if ($this->quality > 50) {
-            $this->quality = 50;
+            $this->setQuality(50);
         }
     }
 
@@ -123,21 +122,48 @@ class BaseItem extends GoblinsItem
      */
     private function beExecutus()
     {
-        $this->quality = 80;
+        $this->setQuality(80);
     }
 
-    private function beManaCake()
+    /**
+     * This is in need of a good refactor but it works and passes the test so lets clean it
+     * up with some additional functionality
+     */
+    private function beConjured()
     {
-        --$this->quality;
-        --$this->quality;
-        --$this->sellIn;
+        $this->decreaseQuality(2);
+        $this->decreaseSellIn(1);
 
         if ($this->sellIn <= 0) {
-            --$this->quality;
-            --$this->quality;
+            $this->decreaseQuality(2);
         }
         if ($this->quality < 0) {
-            $this->quality = 0;
+            $this->setQuality(0);
         }
+    }
+
+    private function increaseQuality(int $i)
+    {
+        $this->quality += $i;
+    }
+
+    private function decreaseQuality(int $i)
+    {
+        $this->quality -= $i;
+    }
+
+    private function setQuality(int $i)
+    {
+        $this->quality = $i;
+    }
+
+    private function increaseSellIn(int $i)
+    {
+        $this->sellIn += $i;
+    }
+
+    private function decreaseSellIn($i)
+    {
+        $this->sellIn -= $i;
     }
 }
