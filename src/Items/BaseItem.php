@@ -46,6 +46,7 @@ class BaseItem extends GoblinsItem
             case 'Aged Brie': $this->beCheese(); break;
             case 'Sulfuras, Hand of Ragnaros': $this->beExecutus(); break;
             case 'Backstage passes to a TAFKAL80ETC concert': $this->beBackstagePass(); break;
+            case 'Conjured Mana Cake': $this->beManaCake(); break;
         }
     }
 
@@ -124,5 +125,20 @@ class BaseItem extends GoblinsItem
     {
         $this->quality = 80;
         $this->sellIn = $this->sellIn;
+    }
+
+    private function beManaCake()
+    {
+        --$this->quality;
+        --$this->quality;
+        --$this->sellIn;
+
+        if ($this->sellIn <= 0) {
+            --$this->quality;
+            --$this->quality;
+        }
+        if ($this->quality < 0) {
+            $this->quality = 0;
+        }
     }
 }
