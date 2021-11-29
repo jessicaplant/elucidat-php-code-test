@@ -124,7 +124,6 @@ class BaseItem extends GoblinsItem
     private function beExecutus()
     {
         $this->quality = 80;
-        $this->sellIn = $this->sellIn;
     }
 
     private function beManaCake()
