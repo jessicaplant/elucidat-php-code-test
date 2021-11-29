@@ -3,6 +3,9 @@
 //use App\Item;
 use App\GildedRose;
 
+/**
+ * Hopefully the goblin won't notice...
+ */
 use App\Items\BaseItem as Item;
 
 describe('Gilded Rose', function () {

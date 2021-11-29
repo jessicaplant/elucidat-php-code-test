@@ -42,11 +42,11 @@ class BaseItem extends GoblinsItem
     public function tick()
     {
         switch($this->name) {
-            case 'normal': $this->beNormal(); break;
             case 'Aged Brie': $this->beCheese(); break;
-            case 'Sulfuras, Hand of Ragnaros': $this->beExecutus(); break;
-            case 'Backstage passes to a TAFKAL80ETC concert': $this->beBackstagePass(); break;
-            case 'Conjured Mana Cake': $this->beManaCake(); break;
+            case strpos($this->name, 'Sulfuras') !== false : $this->beExecutus(); break;
+            case strpos($this->name, 'Backstage passes') !== false :  $this->beBackstagePass(); break;
+            case strpos($this->name, 'Conjured') !== false : $this->beManaCake(); break;
+            default: $this->beNormal();
         }
     }
 
