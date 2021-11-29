@@ -119,6 +119,9 @@ class BaseItem extends GoblinsItem
      *
      * I would normally abstract this into some kind of LegendaryItem but time is pressing. Also I
      * fear the goblin.
+     *
+     * Also I named this function for the WoW fan who wrote the test - as described this would
+     * normally be a LegendaryItem check!
      */
     private function beExecutus()
     {
