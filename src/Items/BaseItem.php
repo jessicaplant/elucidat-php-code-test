@@ -44,6 +44,7 @@ class BaseItem extends GoblinsItem
         switch($this->name) {
             case 'normal': $this->beNormal(); break;
             case 'Aged Brie': $this->beCheese(); break;
+            case 'Sulfuras, Hand of Ragnaros': $this->beExecutus(); break;
             case 'Backstage passes to a TAFKAL80ETC concert': $this->beBackstagePass(); break;
         }
     }
@@ -108,5 +109,20 @@ class BaseItem extends GoblinsItem
         if ($this->quality > 50) {
             $this->quality = 50;
         }
+    }
+
+    /**
+     * This caught me by surprise originally until I realised the lack of a default
+     * entry in switch/case meant the Ragnoros stuff was behaving as expected - until I realised
+     * I had scope to change the test owing to the last line that stated his items would have
+     * a quality of 80.
+     *
+     * I would normally abstract this into some kind of LegendaryItem but time is pressing. Also I
+     * fear the goblin.
+     */
+    private function beExecutus()
+    {
+        $this->quality = 80;
+        $this->sellIn = $this->sellIn;
     }
 }
