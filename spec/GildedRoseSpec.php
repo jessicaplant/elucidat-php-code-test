@@ -1,7 +1,9 @@
 <?php
 
-use App\Item;
+//use App\Item;
 use App\GildedRose;
+
+use App\Items\BaseItem as Item;
 
 describe('Gilded Rose', function () {
     describe('next day', function () {
